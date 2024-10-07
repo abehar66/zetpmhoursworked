@@ -3,8 +3,9 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], function (BaseController, JSONModel, formatter, Filter, FilterOperator) {
+    "sap/ui/model/FilterOperator",
+    '../model/oDataModel',
+], function (BaseController, JSONModel, formatter, Filter, FilterOperator,oDataModel) {
     "use strict";
 
     return BaseController.extend("zetpmhoursworked.controller.Worklist", {
@@ -32,7 +33,16 @@ sap.ui.define([
                 shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
                 tableNoDataText : this.getResourceBundle().getText("tableNoDataText")
             });
+
             this.setModel(oViewModel, "worklistView");
+            this.reportModel = new JSONModel(
+                {
+                    'WorkPerformedSet': [],
+                    
+                });
+
+            this.setModel(this.reportModel, "ReportModel");    
+            oDataModel.init(this);
 
         },
 
@@ -142,7 +152,17 @@ sap.ui.define([
             if (aTableSearchState.length !== 0) {
                 oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
             }
-        }
+        },
+
+        onDisplay: function(evt) {
+            oDataModel.getListOrden('1')
+                .then(oData => {                    
+                    this.reportModel.setProperty('/WorkPerformedSet', oData.results);                                            
+                })
+                .catch(e => {
+
+                })
+        }    
 
     });
 });

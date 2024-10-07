@@ -20,7 +20,7 @@
                 id="table"
                 width="auto"
                 items="{
-                    path: '/WorkPerformedSet',
+                    path: 'ReportModel>/WorkPerformedSet',
                     sorter: {
                         path: 'Aufnr',
                         descending: false
@@ -39,6 +39,8 @@
                             text="{worklistView>/worklistTableTitle}"
                             level="H3"/>
                         <ToolbarSpacer />
+                        <Button id="_IDGenButton1" text='{i18n>buttonDisplay}' type="Accept" press='onDisplay' enabled="true"
+                         ></Button>
                         <SearchField
                             id="searchField"
                             tooltip="{i18n>worklistSearchTooltip}"
@@ -49,16 +51,17 @@
                                     priority="NeverOverflow"/>
                             </layoutData>
                         </SearchField>
+                         
                     </OverflowToolbar>
                 </headerToolbar>
 
                 <columns>
-                    <Column id="nameColumn">
-                        <Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
-                    </Column>
-                    <Column id="unitNumberColumn" hAlign="End">
-                        <Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
-                    </Column>
+                    <Column id="nameColumn1">
+                        <Text text="{i18n>tableColumnOrdenTitle}" id="col1"/>
+                    </Column>  
+                    <Column id="nameColumn2">
+                        <Text text="{i18n>tableColumnWorkcenterTitle}" id="col2" width="30%"/>
+                    </Column>                    
                 </columns>
 
                 <items>
@@ -67,8 +70,11 @@
                         press=".onPress">
                         <cells>
                             <ObjectIdentifier
-                                title="{Aufnr}"/>
+                                title="{ReportModel>Aufnr}"/>
                             <ObjectNumber />
+                        </cells>
+                        <cells>
+                            <Text text="{ReportModel>WorkCenter}"/>
                         </cells>
                     </ColumnListItem>
                 </items>
