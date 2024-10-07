@@ -66,16 +66,16 @@
 
                 <items>
                     <ColumnListItem
+                        id="_IDGenColumnListItem1"
                         type="Navigation"
                         press=".onPress">
                         <cells>
-                            <ObjectIdentifier
-                                title="{ReportModel>Aufnr}"/>
-                            <ObjectNumber />
+                          <Text id="_IDGenText1" text="{ReportModel>Aufnr}"/>                                                        
                         </cells>
-                        <cells>
-                            <Text text="{ReportModel>WorkCenter}"/>
-                        </cells>
+                       
+                        <Text id="_IDGenText2" text="{ReportModel>Workcenter}"/>
+                        <Text id="_IDGenText2" text="{ReportModel>Workcenter}"/>
+                       
                     </ColumnListItem>
                 </items>
             </Table>

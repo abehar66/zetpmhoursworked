@@ -32,12 +32,12 @@ sap.ui.define([
                 
             },
 
-            getListOrden:function(Id=1){                                     
+            getListOrden:function(Idtaller=1){                                     
                 let Filters = [                     
                     new Filter({
                         path: 'Idtaller',
                         operator: FilterOperator.EQ,
-                        value1: IdTaller
+                        value1: Idtaller
                     }),                         
                 ];                
                 
