@@ -62,6 +62,12 @@
                     <Column id="nameColumn2">
                         <Text text="{i18n>tableColumnWorkcenterTitle}" id="col2" width="30%"/>
                     </Column>                    
+                    <Column id="nameColumn3">
+                        <Text text="{i18n>tableColumnEqunrTitle}" id="col3" width="30%"/>
+                    </Column>                    
+                    <Column id="nameColumn4">
+                        <Text text="{i18n>tableColumnEstadoTitle}" id="col4" width="30%"/>
+                    </Column>                    
                 </columns>
 
                 <items>
@@ -73,8 +79,10 @@
                           <Text id="_IDGenText1" text="{ReportModel>Aufnr}"/>                                                        
                         </cells>
                        
-                        <Text id="_IDGenText2" text="{ReportModel>Workcenter}"/>
-                        <Text id="_IDGenText2" text="{ReportModel>Workcenter}"/>
+                        <Text id="_IDGenText2" text="{ReportModel>Workcenterdescr} ({ReportModel>Workcenter})"/>
+                        <Text id="_IDGenText3" text="{ReportModel>Equnrtxt} ({ReportModel>Equnr})"/>
+                        <Text id="_IDGenText4" text="{ReportModel>Estadoordendescr} ({ReportModel>Estadoorden})"/>
+
                        
                     </ColumnListItem>
                 </items>
