@@ -38,10 +38,10 @@ sap.ui.define([
             this.reportModel = new JSONModel(
                 {
                     'WorkPerformedSet': [],
-                    
+                    'WorkcenterSet': []                    
                 });
 
-            this.setModel(this.reportModel, "ReportModel");    
+            this.setModel(this.reportModel, "ReportModel");                
             oDataModel.init(this);
 
         },
@@ -155,14 +155,62 @@ sap.ui.define([
         },
 
         onDisplay: function(evt) {
+            const tableOrder = this.byId("OrdenView--tableOrder");   
+            
+            tableOrder.setBusy(true);
             oDataModel.getListOrden('1')
                 .then(oData => {                    
-                    this.reportModel.setProperty('/WorkPerformedSet', oData.results);                                            
+                    this.reportModel.setProperty('/WorkPerformedSet', oData.results);   
+                    tableOrder.getBinding("items").getModel().setProperty("/WorkPerformedSet", oData.results);
+                    this.setWorkcenterSet(oData.results);
+                    tableOrder.setBusy(false);
                 })
                 .catch(e => {
-
+                    tableOrder.setBusy(false); 
                 })
-        }    
+        } ,
+        
+        setWorkcenterSet: function(tabla){
+            const WorkcenterTable = this.byId("PuestoView--tablePuesto");
+            let result = [];
 
+            tabla.forEach(e=> {
+                let rec = result.find(d => d.Workcenter === e.Workcenter);
+
+                if ( rec === undefined ){  
+
+                    const oNew = {
+                        Workcenter: e.Workcenter,
+                        Workcenterdescr: e.Workcenterdescr,
+                        Timeagreeded: 0,
+                        Timeworked: Number.parseFloat(e.Timeworked),
+                        Cant : 1,
+                        Timeaverage: 0
+                    }; 
+
+                    if (e.Timeagreeded > 0){
+                        oNew.Timeagreeded = Number.parseFloat(e.Timeagreeded);
+                    }
+
+                    result.push(oNew);
+                    rec = oNew;
+                  }
+                 else {
+                    rec.Cant += 1;
+                    rec.Timeworked += Number.parseFloat(e.Timeworked);
+                    if (e.Timeagreeded > 0){
+                      rec.Timeagreeded = Number.parseFloat(e.Timeagreeded);
+                    }
+                 }               
+            });
+
+            result.forEach(e=> {
+                e.Timeaverage = e.Timeworked / e.Cant;
+                e.Timeaverage = e.Timeaverage.toFixed(1);
+            });    
+
+            this.reportModel.setProperty("/WorkcenterSet", result);   
+            WorkcenterTable.getBinding("items").getModel().setProperty("/WorkcenterSet", result);
+        }     
     });
 });
