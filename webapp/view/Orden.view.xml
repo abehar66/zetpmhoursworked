@@ -31,12 +31,12 @@
                 updateFinished=".onUpdateFinished">
 
                 <headerToolbar>
-                    <OverflowToolbar>
+                    <OverflowToolbar id="headerflowOrden">
                         <Title
                             id="tableHeader"
                             text="{worklistView>/worklistTableTitle}"
                             level="H3"/>
-                        <ToolbarSpacer />
+                        <ToolbarSpacer id="headerSpacerOrden" />
                         
                         <SearchField
                             id="searchField"
@@ -44,6 +44,7 @@
                             search=".onSearch">
                             <layoutData>
                                 <OverflowToolbarLayoutData
+                                     id="headerflowDataOrden"
                                     maxWidth="200px"
                                     priority="NeverOverflow"/>
                             </layoutData>

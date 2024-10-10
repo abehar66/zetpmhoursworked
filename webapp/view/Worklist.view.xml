@@ -1,29 +1,70 @@
 <mvc:View
     controllerName="zetpmhoursworked.controller.Worklist"
     xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:mvc="sap.ui.core.mvc"    
+    xmlns:core="sap.ui.core"
     xmlns:semantic="sap.f.semantic">
 
-    <semantic:SemanticPage
-        id="page"
-        headerPinnable="false"
+   <semantic:SemanticPage
+        id="page1"
+        headerPinnable="false" 
         toggleHeaderOnTitleClick="false">
 
-        <semantic:titleHeading>
-            <Title
-                text="{i18n>worklistTitle}"
-                level="H2"/>
-        </semantic:titleHeading>
+    <semantic:titleHeading>
+      <Title id="Title1"
+             text="{i18n>worklistTitle}"
+             level="H2"/>
+     </semantic:titleHeading>   
 
-        <semantic:titleCustomTextActions> 
-            <Button id="_IDGen1" icon="sap-icon://kpi-corporate-performance" 
+     <semantic:titleCustomTextActions>
+            <Button id="IdBtnMostrar" icon="sap-icon://kpi-corporate-performance" 
                                  tooltip="Mostrar Reportes" 
-                                 text='{i18n>buttonDisplay}' type="Accept" 
-                                 press="onDisplay" visible="true" />                 
-        </semantic:titleCustomTextActions>  
+                                 text="{i18n>buttonDisplay}" 
+                                 type="Accept"
+                                 press="onDisplay" visible="true" />                             
+      </semantic:titleCustomTextActions> 
 
-        <semantic:content>
-           <IconTabBar
+      <semantic:headerContent>
+         <VBox alignItems="Center"  id="WorklistBox1">
+         <HBox alignItems="Center" id="WorklistBox2">
+            <Label text="Desde: " labelFor="Desde" visible="true" />
+            <DatePicker	id="Desde"			                	
+                            value="{path: 'ReportModel>/Parameters/Desde', type:'sap.ui.model.type.Date' ,
+                                    formatOptions: { style: 'medium', strictParsing: true}   }"  
+                            displayFormat="medium"                                                     
+                            valueFormat="dd-mm-yyyy"
+			                change="handleChange"                            
+			                visible="true" />                             
+           </HBox>                   
+          <HBox alignItems="Center" id="WorklistBox3">     
+           <Label text="Hasta: " labelFor="Hasta" visible="true"/>
+            <DatePicker	id="Hasta"
+			                value="{path: 'ReportModel>/Parameters/Hasta', type:'sap.ui.model.type.Date' ,
+                                    formatOptions: { style: 'medium', strictParsing: true}   }"  
+                            displayFormat="medium"                                                     
+                            valueFormat="dd-mm-yyyy"
+			                change="handleChange"
+			                visible="true"/> 
+                          
+           </HBox>
+           <HBox alignItems="Center" id="WorklistBox4"> 
+           <Label text="Taller: " labelFor="IdTaller" visible="true"/>
+           <ComboBox
+                    required="true"
+                    id="IdTaller"                                    
+                    width="1000px"
+                    items="{
+                            path: 'ReportModel>/Taller',
+                            sorter: { path: 'Key' }
+                           }"  >
+                     <core:Item key="{ReportModel>/Taller/Key}" text="{ReportModel>/Taller/Value}" />                         
+            </ComboBox>  
+          </HBox>  
+         </VBox> 
+       </semantic:headerContent> 
+
+    <semantic:content>     
+     <IconTabBar
 				id="iconTabBar"
 				headerBackgroundDesign="Transparent"
 				class="sapUiResponsiveContentPadding"
@@ -31,22 +72,20 @@
 				select=""
 				selectedKey="">				
                 <items>
-                    <IconTabFilter id="OrderTab" text="Orden PM" key="key1">
-						<mvc:XMLView id="OrdenView" viewName="zetpmhoursworked.view.Orden"></mvc:XMLView>
+                    <IconTabFilter id="OrderTab" text="Ordenes PM" key="key1">
+						<mvc:XMLView id="OrdenView1" viewName="zetpmhoursworked.view.Orden"></mvc:XMLView>
 					</IconTabFilter>						
 
-                    <IconTabFilter id="PuestoTab" text="Tiempo Promedio" key="key2">
-						<mvc:XMLView id="PuestoView" viewName="zetpmhoursworked.view.Puesto"></mvc:XMLView>
-					</IconTabFilter>						
+                    <IconTabFilter id="PuestoTab" text="Tiempo Puesto Trabajo" key="key2">
+						<mvc:XMLView id="PuestoView1" viewName="zetpmhoursworked.view.Puesto"></mvc:XMLView>
+					</IconTabFilter>	
+
+                    <IconTabFilter id="PersonalTab" text="Tiempo Personal" key="key3">
+						<mvc:XMLView id="PersonalView1" viewName="zetpmhoursworked.view.Personal"></mvc:XMLView>
+					</IconTabFilter>                 					
                     						
                 </items>                
-			</IconTabBar>     
-        </semantic:content>
-
-        <semantic:sendEmailAction>
-            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
-        </semantic:sendEmailAction>
-
-    </semantic:SemanticPage>
-
+			</IconTabBar> 
+   </semantic:content>     
+   </semantic:SemanticPage>      
 </mvc:View>

@@ -1,5 +1,5 @@
 <mvc:View 
-  id="PuestoView"  
+  id="PersonalView"  
   controllerName="zetpmhoursworked.controller.Worklist"  
   xmlns="sap.m" 
   xmlns:mvc="sap.ui.core.mvc"
@@ -8,17 +8,17 @@
   xmlns:m="sap.m" 
   xmlns:l="sap.ui.layout" >  
   <f:SimpleForm		
-		id="PuestoForm"
+		id="PersonalForm"
 		columnsL="3"
 		columnsM="3"
 		editable="true"
 		layout="ResponsiveGridLayout">		
 		<f:content>	
              <Table
-                id="tablePuesto"
+                id="tablePersonal"
                 width="auto"
                 items="{
-                    path: 'ReportModel>/WorkcenterSet',
+                    path: 'ReportModel>/PersonalSet',
                     sorter: {
                         path: 'Workcenter',
                         descending: false
@@ -31,20 +31,20 @@
                 updateFinished=".onUpdateFinished">
 
                 <headerToolbar>
-                    <OverflowToolbar id="headerflowPuesto" >
+                    <OverflowToolbar  id="headerflowPersoanl" >
                         <Title
-                            id="tableHeaderPuesto"
+                            id="tableHeaderPersonal"
                             text="{worklistView>/worklistTableTitle}"
                             level="H3"/>
-                        <ToolbarSpacer id="headerSpacerPuesto" />
+                        <ToolbarSpacer id="headerSpaceOrden"/>
                         
                         <SearchField
-                            id="searchFieldPuesto"
+                            id="searchFieldPersonal"
                             tooltip="{i18n>worklistSearchTooltip}"
                             search=".onSearch">
                             <layoutData>
                                 <OverflowToolbarLayoutData
-                                    id="headerLayout"
+                                    id="headerLayoutOrden"
                                     maxWidth="200px"
                                     priority="NeverOverflow"/>
                             </layoutData>
@@ -54,25 +54,29 @@
                 </headerToolbar>
 
                 <columns>
-                    <Column id="PuestonameColumn1">
-                        <Text text="{i18n>tableColumnWorkcenterTitle}" id="Puestocol1"/>
+                    <Column id="PersonalnameColumn1">
+                        <Text text="{i18n>tableColumnWorkcenterTitle}" id="Personalcol1"/>
                     </Column>                      
-                    <Column id="PuestonameColumn2">
-                        <Text text="{i18n>tableColumnTimeAgreededAverageTitle}" id="Puestocol2" width="30%"/>
+                    <Column id="PersonalameColumn2">
+                        <Text text="{i18n>tableColumnPersonalTitle}" id="Personalcol2" width="35%"/>
+                    </Column>                      
+                    <Column id="PersonalnameColumn3">
+                        <Text text="{i18n>tableColumnTimeAgreededAverageTitle}" id="Personalcol3" width="35%"/>
                     </Column>                                        
-                    <Column id="PuestonameColumn4">
-                        <Text text="{i18n>tableColumnTimeAverageTitle}" id="Puestocol4" width="30%"/>
+                    <Column id="PersonalnameColumn4">
+                        <Text text="{i18n>tableColumnTimeAverageTitle}" id="Personalcol4" width="35%"/>
                     </Column>                    
                 </columns>
 
                 <items>
                     <ColumnListItem
-                        id="_IDGenColumnListItemWorkcenter"
+                        id="_IDGenColumnListItemPersonal"
                         type="Navigation"
                         press=".onPress">                                              
-                        <Text id="_IDGenPuestoText1" text="{ReportModel>Workcenterdescr}"/>
-                        <Text id="_IDGenPuestoText2" text="{ReportModel>Timeagreeded}"/>                        
-                        <Text id="_IDGenPuestoText4" text="{ReportModel>Timeaverage}"/>
+                        <Text id="_IDGenPersonalText1" text="{ReportModel>Workcenterdescr}"/>
+                        <Text id="_IDGenPersonalText2" text="{ReportModel>Pernr}"/>
+                        <Text id="_IDGenPersonalText3" text="{ReportModel>Timeagreeded}"/>                        
+                        <Text id="_IDGenPersonalText4" text="{ReportModel>Timeaverage}"/>
                     </ColumnListItem>
                 </items>
             </Table>

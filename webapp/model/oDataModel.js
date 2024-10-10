@@ -63,7 +63,36 @@ sap.ui.define([
                     errorMessage = e.responseText;
                 }
                 return errorMessage;
-            },           
+            }, 
             
+            getListMaestro:function(maestro){
+
+                let Filters = [ 
+                    new Filter({
+                        path: 'Maestro',
+                        operator: FilterOperator.EQ,
+                        value1: maestro
+                    }),
+                    new Filter({
+                        path: 'Usuario',
+                        operator: FilterOperator.EQ,
+                        value1: this.UserId
+                    }),         
+                ];
+                
+                return new Promise(function (resolve, reject) {
+
+                    this.odataModel.read(maestroEntity, {  
+                        filters: Filters,  
+                        success: oData => {
+                            resolve(oData)
+                        },
+                        error: e => {
+                            reject(e)
+                        }
+                    });
+                }.bind(this))
+
+            },            
     };
 });
